@@ -7,8 +7,8 @@
         <ProjectGuid>{3DFCEA24-0833-4181-9731-55DA02C65317}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>FiveSpnLoggerClient</RootNamespace>
-        <AssemblyName>FiveSpnLoggerClient</AssemblyName>
+        <RootNamespace>FiveSpnLoggerClientLibrary</RootNamespace>
+        <AssemblyName>FiveSpnLoggerClientLibrary</AssemblyName>
         <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -42,8 +42,8 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Classes\ClientLogger.cs" />
         <Compile Include="Classes\LogMessage.cs" />
+        <Compile Include="ClientLogger.cs" />
         <Compile Include="Enums\LogMessageSeverity.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>

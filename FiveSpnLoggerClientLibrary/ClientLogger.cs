@@ -1,9 +1,10 @@
 ﻿using System;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
-using FiveSpnLoggerClient.Enums;
+using FiveSpnLoggerClientLibrary.Classes;
+using FiveSpnLoggerClientLibrary.Enums;
 
-namespace FiveSpnLoggerClient.Classes
+namespace FiveSpnLoggerClientLibrary
 {
     public class ClientLogger
     {
@@ -19,7 +20,7 @@ namespace FiveSpnLoggerClient.Classes
         }
         private ClientLogger()
         {
-               
+            SendClientLogMessage(new LogMessage("FiveSPN - Logger",LogMessageSeverity.Info,"Logger initialized."));
         }
 
         public static void SendClientLogMessage(LogMessage logMessage)
@@ -28,7 +29,7 @@ namespace FiveSpnLoggerClient.Classes
             Console.WriteLine(messageCombined);
             if (logMessage.Severity == LogMessageSeverity.Error || logMessage.Severity == LogMessageSeverity.Critical)
             {
-                BaseScript.TriggerServerEvent("ServerBasics:ClientLogMessage", API.PlayerId(), messageCombined);
+                BaseScript.TriggerServerEvent("ServerBasics:ClientLogMessage", logMessage.Severity, logMessage.Source, logMessage.Message);
             }
         }
     }
