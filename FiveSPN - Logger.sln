@@ -10,19 +10,26 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Release FiveM|Any CPU = Release FiveM|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3DFCEA24-0833-4181-9731-55DA02C65317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3DFCEA24-0833-4181-9731-55DA02C65317}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DFCEA24-0833-4181-9731-55DA02C65317}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DFCEA24-0833-4181-9731-55DA02C65317}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DFCEA24-0833-4181-9731-55DA02C65317}.Release FiveM|Any CPU.ActiveCfg = Release FiveM|Any CPU
+		{3DFCEA24-0833-4181-9731-55DA02C65317}.Release FiveM|Any CPU.Build.0 = Release FiveM|Any CPU
 		{8575D0D3-5B9E-4154-ACDB-486197A019E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8575D0D3-5B9E-4154-ACDB-486197A019E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8575D0D3-5B9E-4154-ACDB-486197A019E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8575D0D3-5B9E-4154-ACDB-486197A019E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8575D0D3-5B9E-4154-ACDB-486197A019E7}.Release FiveM|Any CPU.ActiveCfg = Release FiveM|Any CPU
+		{8575D0D3-5B9E-4154-ACDB-486197A019E7}.Release FiveM|Any CPU.Build.0 = Release FiveM|Any CPU
 		{8E332513-608B-469A-98EB-9BBF841AB39B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E332513-608B-469A-98EB-9BBF841AB39B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E332513-608B-469A-98EB-9BBF841AB39B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E332513-608B-469A-98EB-9BBF841AB39B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E332513-608B-469A-98EB-9BBF841AB39B}.Release FiveM|Any CPU.ActiveCfg = Release FiveM|Any CPU
+		{8E332513-608B-469A-98EB-9BBF841AB39B}.Release FiveM|Any CPU.Build.0 = Release FiveM|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FiveSpnLoggerServer")]
+[assembly: AssemblyTitle("FiveSpnLoggerServerLibrary")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FiveSpnLoggerServer")]
+[assembly: AssemblyProduct("FiveSpnLoggerServerLibrary")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8E332513-608B-469A-98EB-9BBF841AB39B")]
+[assembly: Guid("8575D0D3-5B9E-4154-ACDB-486197A019E7")]
 
 // Version information for an assembly consists of the following four values:
 //

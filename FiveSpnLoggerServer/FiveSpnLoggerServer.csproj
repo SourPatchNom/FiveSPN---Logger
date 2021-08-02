@@ -7,8 +7,8 @@
         <ProjectGuid>{8E332513-608B-469A-98EB-9BBF841AB39B}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>FiveSpnLoggerServer</RootNamespace>
-        <AssemblyName>FiveSpnLoggerServer</AssemblyName>
+        <RootNamespace>FiveSpnLoggerClientToServer</RootNamespace>
+        <AssemblyName>FiveSpnLoggerClientToServer.net</AssemblyName>
         <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -31,6 +31,9 @@
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release FiveM|AnyCPU' ">
+      <OutputPath>bin\Release FiveM\</OutputPath>
+    </PropertyGroup>
     <ItemGroup>
         <Reference Include="CitizenFX.Core.Server, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\packages\CitizenFX.Core.Server.1.0.4299\lib\net45\CitizenFX.Core.Server.dll</HintPath>
@@ -42,7 +45,7 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="LoggerServer.cs" />
+        <Compile Include="LoggerClientToServer.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
@@ -62,5 +65,7 @@
     <Target Name="AfterBuild">
     </Target>
     -->
-
+    <PropertyGroup>
+        <PostBuildEvent>copy /y "$(TargetPath)" "$(SolutionDir)FiveMResource\FiveSPN-Logger\"</PostBuildEvent>
+    </PropertyGroup>
 </Project>

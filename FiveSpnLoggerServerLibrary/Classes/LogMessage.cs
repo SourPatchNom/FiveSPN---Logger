@@ -1,6 +1,6 @@
-﻿using FiveSpnLoggerClientLibrary.Enums;
+﻿using FiveSpnLoggerServerLibrary.Enums;
 
-namespace FiveSpnLoggerClientLibrary.Classes
+namespace FiveSpnLoggerServerLibrary.Classes
 {
     public class LogMessage
     {
