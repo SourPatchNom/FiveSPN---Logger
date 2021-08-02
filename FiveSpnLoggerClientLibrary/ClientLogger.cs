@@ -8,11 +8,7 @@ namespace FiveSpnLoggerClientLibrary
 {
     public class ClientLogger
     {
-        private static readonly ClientLogger _logger = new ClientLogger();
-        public static ClientLogger Logger
-        {
-            get { return _logger; }
-        }
+        public static ClientLogger Logger { get; } = new ClientLogger();
 
         static ClientLogger()
         {
@@ -20,16 +16,23 @@ namespace FiveSpnLoggerClientLibrary
         }
         private ClientLogger()
         {
-            SendClientLogMessage(new LogMessage("FiveSPN - Logger",LogMessageSeverity.Info,"Logger initialized."));
+            SendClientLogMessage(new LogMessage("FiveSPN - Logger",LogMessageSeverity.Info,"New resource logger initialized."));
         }
 
         public static void SendClientLogMessage(LogMessage logMessage)
         {
-            string messageCombined = $"{DateTime.Now,-19} [{logMessage.Severity,8}] {logMessage.Source}: {logMessage.Message}";
-            Console.WriteLine(messageCombined);
-            if (logMessage.Severity == LogMessageSeverity.Error || logMessage.Severity == LogMessageSeverity.Critical)
+            try
             {
-                BaseScript.TriggerServerEvent("ServerBasics:ClientLogMessage", logMessage.Severity, logMessage.Source, logMessage.Message);
+                Debug.WriteLine($"{DateTime.Now,-19} [{logMessage.Severity,8}] {logMessage.Source}: {logMessage.Message}");
+                if (logMessage.Severity == LogMessageSeverity.Error || logMessage.Severity == LogMessageSeverity.Critical)
+                {
+                    BaseScript.TriggerServerEvent("ServerBasics:ClientLogMessage", logMessage.Severity, logMessage.Source, logMessage.Message);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"{DateTime.Now,-19} [{LogMessageSeverity.Error,8}] Client Logger : Exception thrown attempting to log a message!");
+                Debug.WriteLine(e.Message);
             }
         }
     }

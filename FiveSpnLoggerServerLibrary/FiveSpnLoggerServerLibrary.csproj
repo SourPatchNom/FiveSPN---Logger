@@ -4,15 +4,12 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{3DFCEA24-0833-4181-9731-55DA02C65317}</ProjectGuid>
-        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <ProjectGuid>{8575D0D3-5B9E-4154-ACDB-486197A019E7}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>FiveSpnLoggerClientLibrary</RootNamespace>
-        <AssemblyName>FiveSpnLoggerClientLibrary</AssemblyName>
+        <RootNamespace>FiveSpnLoggerServerLibrary</RootNamespace>
+        <AssemblyName>FiveSpnLoggerServerLibrary</AssemblyName>
         <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-        <DebugType>embedded</DebugType>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -36,12 +33,10 @@
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release FiveM|AnyCPU' ">
       <OutputPath>bin\Release FiveM\</OutputPath>
-      <DefineConstants>FIVEM;</DefineConstants>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="CitizenFX.Core.Client, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\CitizenFX.Core.Client.1.0.4298\lib\net45\CitizenFX.Core.Client.dll</HintPath>
-          <Private>True</Private>
+        <Reference Include="CitizenFX.Core.Server, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\CitizenFX.Core.Server.1.0.4299\lib\net45\CitizenFX.Core.Server.dll</HintPath>
         </Reference>
         <Reference Include="System" />
         <Reference Include="System.Core" />
@@ -50,12 +45,9 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Classes\LogMessage.cs" />
-        <Compile Include="ClientLogger.cs" />
+        <Compile Include="ServerLogger.cs" />
         <Compile Include="Enums\LogMessageSeverity.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -63,8 +55,8 @@
     <Target Name="BeforeBuild">
     </Target>
     <Target Name="AfterBuild">
-        
-    </Target>-->
+    </Target>
+    -->
     <PropertyGroup>
         <PostBuildEvent>copy /y "$(TargetPath)" "$(SolutionDir)FiveMResource\FiveSPN-Logger\"</PostBuildEvent>
     </PropertyGroup>
