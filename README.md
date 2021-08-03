@@ -14,7 +14,6 @@ start FiveSPN-Logger
 
 ```c#
 
-
 ```
 
 ## Contributing
