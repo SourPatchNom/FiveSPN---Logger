@@ -20,7 +20,8 @@ namespace FiveSpnLoggerServerLibrary
 
         public static void SendServerLogMessage(LogMessage logMessage)
         {
-            string messageCombined = $"{DateTime.Now,-19} [{logMessage.Severity,8}] {logMessage.Source}: {logMessage.Message}";
+            //string messageCombined = $"{DateTime.Now,-19} [{logMessage.Severity,8}] {logMessage.Source}: {logMessage.Message}";
+            string messageCombined = $"[{logMessage.Source,20}][{logMessage.Severity,8}] {DateTime.Now,-19} : {logMessage.Message}";
             WriteMessageToConsole(logMessage.Severity, messageCombined);
         }
 
