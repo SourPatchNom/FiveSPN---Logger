@@ -10,7 +10,7 @@
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>FiveSpn.Logger.Client</RootNamespace>
-        <AssemblyName>FiveSpnLoggerClient.net</AssemblyName>
+        <AssemblyName>FiveSpn.Logger.Client.net</AssemblyName>
         <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
         <DebugType>embedded</DebugType>
         <FileAlignment>512</FileAlignment>

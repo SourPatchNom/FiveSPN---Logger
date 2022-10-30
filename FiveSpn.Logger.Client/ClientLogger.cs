@@ -8,18 +8,19 @@ namespace FiveSpn.Logger.Client
 {
     public class ClientLogger : BaseScript
     {
-        public static ClientLogger Logger { get; } = new ClientLogger();
-
-        static ClientLogger()
-        {
-
-        }
-        private ClientLogger()
+        public ClientLogger()
         {
             SendClientLogMessage(new LogMessage("FiveSPN - Logger",LogMessageSeverity.Info,"New resource logger initialized."));
+            EventHandlers["FiveSPN-LogToClient"] += new Action<string, int, string>(HandleClientLogMessage);
         }
 
-        public static void SendClientLogMessage(LogMessage logMessage)
+        private void HandleClientLogMessage(string arg1, int arg2, string arg3)
+        {
+            SendClientLogMessage(new LogMessage(arg1,(LogMessageSeverity)arg2,arg3));
+        }
+
+
+        private static void SendClientLogMessage(LogMessage logMessage)
         {
             try
             {
