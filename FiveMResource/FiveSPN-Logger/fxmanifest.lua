@@ -8,6 +8,15 @@ url 'https://itsthenom.com'
 
 games { 'gta5' }
 
+log_level '5'
+
+--0 Critical
+--1 Error
+--2 Warning
+--3 Info
+--4 Verbose
+--5 Debug
+
 server_scripts {
 	"FiveSpn.Logger.Server.net.dll",
 }
