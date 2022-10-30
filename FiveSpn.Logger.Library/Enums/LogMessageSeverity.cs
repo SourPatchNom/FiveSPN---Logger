@@ -1,4 +1,4 @@
-﻿namespace FiveSpnLoggerClientLibrary.Enums
+﻿namespace FiveSpn.Logger.Library.Enums
 {
     public enum LogMessageSeverity
     {

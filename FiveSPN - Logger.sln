@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpnLoggerClientLibrary", "FiveSpnLoggerClientLibrary\FiveSpnLoggerClientLibrary.csproj", "{3DFCEA24-0833-4181-9731-55DA02C65317}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpn.Logger.Client", "FiveSpn.Logger.Client\FiveSpn.Logger.Client.csproj", "{3DFCEA24-0833-4181-9731-55DA02C65317}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpnLoggerServerLibrary", "FiveSpnLoggerServerLibrary\FiveSpnLoggerServerLibrary.csproj", "{8575D0D3-5B9E-4154-ACDB-486197A019E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpn.Logger.Library", "FiveSpn.Logger.Library\FiveSpn.Logger.Library.csproj", "{8575D0D3-5B9E-4154-ACDB-486197A019E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpnLoggerServer", "FiveSpnLoggerServer\FiveSpnLoggerServer.csproj", "{8E332513-608B-469A-98EB-9BBF841AB39B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpn.Logger.Server", "FiveSpn.Logger.Server\FiveSpn.Logger.Server.csproj", "{72D125C8-B78D-4A10-8C05-67EEDDD7EE24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,11 +25,11 @@ Global
 		{8575D0D3-5B9E-4154-ACDB-486197A019E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8575D0D3-5B9E-4154-ACDB-486197A019E7}.Release FiveM|Any CPU.ActiveCfg = Release FiveM|Any CPU
 		{8575D0D3-5B9E-4154-ACDB-486197A019E7}.Release FiveM|Any CPU.Build.0 = Release FiveM|Any CPU
-		{8E332513-608B-469A-98EB-9BBF841AB39B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E332513-608B-469A-98EB-9BBF841AB39B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E332513-608B-469A-98EB-9BBF841AB39B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E332513-608B-469A-98EB-9BBF841AB39B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E332513-608B-469A-98EB-9BBF841AB39B}.Release FiveM|Any CPU.ActiveCfg = Release FiveM|Any CPU
-		{8E332513-608B-469A-98EB-9BBF841AB39B}.Release FiveM|Any CPU.Build.0 = Release FiveM|Any CPU
+		{72D125C8-B78D-4A10-8C05-67EEDDD7EE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D125C8-B78D-4A10-8C05-67EEDDD7EE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D125C8-B78D-4A10-8C05-67EEDDD7EE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D125C8-B78D-4A10-8C05-67EEDDD7EE24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D125C8-B78D-4A10-8C05-67EEDDD7EE24}.Release FiveM|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D125C8-B78D-4A10-8C05-67EEDDD7EE24}.Release FiveM|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,12 +1,12 @@
 ﻿using System;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
-using FiveSpnLoggerClientLibrary.Classes;
-using FiveSpnLoggerClientLibrary.Enums;
+using FiveSpn.Logger.Client.Classes;
+using FiveSpn.Logger.Client.Enums;
 
-namespace FiveSpnLoggerClientLibrary
+namespace FiveSpn.Logger.Client
 {
-    public class ClientLogger
+    public class ClientLogger : BaseScript
     {
         public static ClientLogger Logger { get; } = new ClientLogger();
 
