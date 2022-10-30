@@ -8,11 +8,14 @@ url 'https://itsthenom.com'
 
 games { 'gta5' }
 
-server_script {
-	"FiveSpnLoggerClientToServer.net.dll",
+server_scripts {
+	"FiveSpn.Logger.Server.net.dll",
+}
+
+client_scripts {
+	"FiveSpn.Logger.Client.net.dll",
 }
 
 files { 
-	"FiveSpnLoggerServerLibrary.dll",
-	"FiveSpnLoggerClientLibrary.dll",
+	"FiveSpn.Logger.Library.dll"
 }
