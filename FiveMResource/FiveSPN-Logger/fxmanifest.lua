@@ -8,8 +8,11 @@ url 'https://itsthenom.com'
 
 games { 'gta5' }
 
-log_level '5'
-
+log_days '5' --How many days should logs be kept?
+log_level_private '5' --What is the logging level for private logging? This information will be sent to the private_discord_webhook (if set), console, and txt log.
+log_level_public '3' --What is the logging level for public logging? This information will be sent to the public_discord_webhook (if set). Public will never send DEBUG info!
+discord_webhook_public ''
+discord_webhook_private ''
 --0 Critical
 --1 Error
 --2 Warning
@@ -26,5 +29,6 @@ client_scripts {
 }
 
 files { 
-	"FiveSpn.Logger.Library.dll"
+	"FiveSpn.Logger.Library.dll",
+	"Newtonsoft.Json.dll"
 }
