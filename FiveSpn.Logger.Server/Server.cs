@@ -17,41 +17,48 @@ namespace FiveSpn.Logger.Server
         private readonly LogMessageSeverity _severityPublic = LogMessageSeverity.Warning;
         private readonly LogMessageSeverity _severityPrivate = LogMessageSeverity.Debug;
         private int _daysLogsKept = 0;
+        
         private DiscordWebhook _publicHook = new DiscordWebhook(API.GetResourceMetadata(API.GetCurrentResourceName(), "discord_webhook_public", 0));
         private DiscordWebhook _privateHook = new DiscordWebhook(API.GetResourceMetadata(API.GetCurrentResourceName(), "discord_webhook_private", 0));
+        private Queue<string> _hookQuePublic = new Queue<string>();
+        private Queue<string> _hookQuePrivate = new Queue<string>();
+        private readonly object _hookLock = new object();
+        private DateTime _lastHookSend = DateTime.UtcNow;
+        
         private readonly string _logDirectory = API.GetResourcePath(API.GetCurrentResourceName()) + "\\logs";
         private readonly string _logFile = "\\FiveSpnLog-" + DateTime.UtcNow.Date.ToString("MMddyyyy") + ".txt";
         private string LogPath => _logDirectory + _logFile;
         private readonly object _writeLock = new object();
-        private readonly object _hookLock = new object();
+        
         private const string ServerStartMessage = @"
-#############################################################################################################
-#      _________                     __________         __         .__       _______                        #
-#     /   _____/ ____  __ _________  \______   \_____ _/  |_  ____ |  |__    \      \   ____   _____        #
-#     \_____  \ /  _ \|  |  \_  __ \  |     ___/\__  \\   __\/ ___\|  |  \   /   |   \ /  _ \ /     \       #
-#     /        (  <_> )  |  /|  | \/  |    |     / __ \|  | \  \___|   Y  \ /    |    (  <_> )  Y Y  \      #
-#    /_______  /\____/|____/ |__|     |____|    (____  /__|  \___  >___|  / \____|__  /\____/|__|_|  /      #
-#            \/                                      \/          \/     \/          \/             \/       # 
-######################################## FiveSPN Services Initializing ######################################
-# It looks like the server might have restarted?                                                            #
-# If the logger resource was restarted directly all dependancies were likely stopped and must be restarted! #
-# Visit itsthenom.com for more information about FiveSPN resources!                                         #
-#############################################################################################################
+#####################################################################
+#   ___________.__               __________________________         #
+#   \_   _____/|__|__  __ ____  /   _____/\______   \      \        #
+#    |    __)  |  \  \/ // __ \ \_____  \  |     ___/   |   \       # 
+#    |     \   |  |\   /\  ___/ /        \ |    |  /    |    \      #
+#    \___  /   |__| \_/  \___  >_______  / |____|  \____|__  /      #
+#        \/                  \/        \/                  \/       # 
+################### FiveSPN Services Initializing ###################
+# It looks like the server might have restarted?                    #
+# If the logger resource was restarted directly all dependancies    #
+# were likely stopped and must be restarted!                        #
+# Visit itsthenom.com for more information about FiveSPN resources! #
+#####################################################################
 ";
         private const string ServerStartMessageDiscord = @"
 ```
-###################################
-#   __________________________    #
-# /   _____/\______   \      \    #
-# \_____  \  |     ___/   |   \   #
-# /        \ |    |  /    |    \  #
-#/_______  / |____|  \____|__  /  #
-#        \/                  \/   # 
-## FiveSPN Services Initializing ##
+#####################################################################
+#   ___________.__               __________________________         #
+#   \_   _____/|__|__  __ ____  /   _____/\______   \      \        #
+#    |    __)  |  \  \/ // __ \ \_____  \  |     ___/   |   \       # 
+#    |     \   |  |\   /\  ___/ /        \ |    |  /    |    \      #
+#    \___  /   |__| \_/  \___  >_______  / |____|  \____|__  /      #
+#        \/                  \/        \/                  \/       # 
+################### FiveSPN Services Initializing ###################
 ```
 **It looks like the server might have restarted?**
 *If the logger resource was restarted directly all dependancies were likely stopped and must be restarted!* 
-Visit itsthenom.com for more information about FiveSPN resources!                                        
+`Visit itsthenom.com for more information about FiveSPN resources!`                                        
 ";
 
         public Service()
@@ -79,6 +86,41 @@ Visit itsthenom.com for more information about FiveSPN resources!
             ProcessServerLogMessage(new LogMessage(API.GetCurrentResourceName(), LogMessageSeverity.Verbose,"Public log level set to " + _severityPublic + "."));
             ProcessServerLogMessage(new LogMessage(API.GetCurrentResourceName(), LogMessageSeverity.Verbose,"Private log level set to " + _severityPrivate + "."));
             ProcessServerLogMessage(new LogMessage(API.GetCurrentResourceName(), LogMessageSeverity.Verbose,"Logs are retained for " + _daysLogsKept + " days."));
+            Tick += OnTick;
+        }
+
+        private Task OnTick()
+        {
+            try
+            {
+                lock (_hookLock)
+                {
+                    if (DateTime.UtcNow > _lastHookSend.AddSeconds(1))
+                    {
+                        _lastHookSend = DateTime.UtcNow;
+                        if (_hookQuePublic.Any())
+                        {
+                            if (_publicHook._webhookUrl != "")
+                            {
+                                _publicHook.Send(_hookQuePublic.Dequeue(), "FiveSPN-Logger");
+                            }
+                        }
+                        if (_hookQuePrivate.Any())
+                        {
+                            if (_privateHook._webhookUrl != "")
+                            {
+                                _privateHook.Send(_hookQuePrivate.Dequeue(),"FiveSPN-Logger");
+                            }
+                        }        
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return Task.FromResult(1);
         }
 
         private void WriteStartupLines()
@@ -112,12 +154,12 @@ Visit itsthenom.com for more information about FiveSPN resources!
 
             if (_publicHook._webhookUrl != "")
             {
-                _publicHook.Send(ServerStartMessageDiscord);
+                _publicHook.Send(ServerStartMessageDiscord,"FiveSPN-Logger");
             }
             
             if (_privateHook._webhookUrl != "")
             {
-                _privateHook.Send(ServerStartMessageDiscord);
+                _privateHook.Send(ServerStartMessageDiscord,"FiveSPN-Logger");
             }
         }
 
@@ -170,20 +212,12 @@ Visit itsthenom.com for more information about FiveSPN resources!
                 Delay(1000);
                 if (isPublic)
                 {
-                    if (_publicHook._webhookUrl != "")
-                    {
-                        _publicHook.Send($"[{logMessage.Source,20}] {logMessage.Message}");
-                    }
-
-                    return Task.FromResult("Sent");
+                    _hookQuePublic.Enqueue($"**{logMessage.Source,20}** *{logMessage.Message}*");
+                    return Task.FromResult("Queued");
                 }
 
-                if (_privateHook._webhookUrl != "")
-                {
-                    _privateHook.Send($"[{logMessage.Source,20}][{logMessage.Severity,8}] {DateTime.Now,-19} : {logMessage.Message}");
-                }
-
-                return Task.FromResult("Sent");
+                _hookQuePrivate.Enqueue($"**{logMessage.Source}-{logMessage.Severity}** {DateTime.Now,-19} *{logMessage.Message}*");
+                return Task.FromResult("Queued");
             }
         }
 
