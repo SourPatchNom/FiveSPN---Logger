@@ -14,8 +14,10 @@ namespace FiveSpn.Logger.Server
 {
     public class Service : BaseScript
     {
-        private readonly LogMessageSeverity _severityPublic = LogMessageSeverity.Warning;
-        private readonly LogMessageSeverity _severityPrivate = LogMessageSeverity.Debug;
+        private readonly LogMessageSeverity _severityServer = LogMessageSeverity.Debug;
+        private readonly bool _logToDiscord = false;
+        private readonly LogMessageSeverity _severityPublic = LogMessageSeverity.Critical;
+        private readonly LogMessageSeverity _severityPrivate = LogMessageSeverity.Critical;
         private int _daysLogsKept = 0;
         
         private DiscordWebhook _publicHook = new DiscordWebhook(API.GetResourceMetadata(API.GetCurrentResourceName(), "discord_webhook_public", 0));
@@ -76,23 +78,34 @@ namespace FiveSpn.Logger.Server
             {
                 WriteMessageToConsole(new LogMessage(API.GetCurrentResourceName(), LogMessageSeverity.Critical,"Logging File Reset Error!\n"+e.Message));
             }
+            if (int.TryParse(API.GetResourceMetadata(API.GetCurrentResourceName(), "log_level_server", 0), out var resultSer))_severityServer = (LogMessageSeverity)resultSer;
+            _logToDiscord = API.GetResourceMetadata(API.GetCurrentResourceName(), "log_to_discord", 0) == "true";
             if (int.TryParse(API.GetResourceMetadata(API.GetCurrentResourceName(), "log_level_public", 0), out var resultPub))_severityPublic = (LogMessageSeverity)resultPub;
             if (int.TryParse(API.GetResourceMetadata(API.GetCurrentResourceName(), "log_level_private", 0), out var resultPri))_severityPrivate = (LogMessageSeverity)resultPri;
             if (int.TryParse(API.GetResourceMetadata(API.GetCurrentResourceName(), "log_days", 0), out _daysLogsKept)) CleanLogs(_daysLogsKept);
-            EventHandlers["FiveSPN-ServerLogToServer"] += new Action<string, int, string>(HandleServerLogMessage);
-            EventHandlers["FiveSPN-ClientLogToServer"] += new Action<Player, string, int, string>(HandlePlayerLogMessage);
+            EventHandlers["FiveSPN-LogToDiscord"] += new Action<bool, string, string>(HandleDiscordLogMessage);
+            EventHandlers["FiveSPN-LogToServer"] += new Action<string, int, string>(HandleServerLogMessage);
+            EventHandlers["FiveSPN-LogFromClient"] += new Action<Player, string, int, string>(HandlePlayerLogMessage);
             ProcessServerLogMessage(new LogMessage(API.GetCurrentResourceName(), LogMessageSeverity.Info,"Server is starting or logger restarted!"));
             Delay(500);
+            ProcessServerLogMessage(new LogMessage(API.GetCurrentResourceName(), LogMessageSeverity.Verbose,"Server log level set to " + _severityServer + "."));
             ProcessServerLogMessage(new LogMessage(API.GetCurrentResourceName(), LogMessageSeverity.Verbose,"Public log level set to " + _severityPublic + "."));
             ProcessServerLogMessage(new LogMessage(API.GetCurrentResourceName(), LogMessageSeverity.Verbose,"Private log level set to " + _severityPrivate + "."));
             ProcessServerLogMessage(new LogMessage(API.GetCurrentResourceName(), LogMessageSeverity.Verbose,"Logs are retained for " + _daysLogsKept + " days."));
-            Tick += OnTick;
+            Tick += OnTickDiscordQueue;
         }
 
-        private Task OnTick()
+        private void HandleDiscordLogMessage(bool isPublic, string source, string message)
+        {
+            if (!_logToDiscord) return;
+            WriteMessageToWebhook(new LogMessage(source, LogMessageSeverity.Info, message), isPublic);
+        }
+
+        private Task OnTickDiscordQueue()
         {
             try
             {
+                if (!_logToDiscord) return Task.FromResult("Not Logging To Discord");
                 lock (_hookLock)
                 {
                     if (DateTime.UtcNow > _lastHookSend.AddSeconds(1))
@@ -198,9 +211,12 @@ namespace FiveSpn.Logger.Server
 
         private void ProcessServerLogMessage(LogMessage logMessage)
         {
-            if (logMessage.Severity <= _severityPublic && logMessage.Severity != LogMessageSeverity.Debug) WriteMessageToWebhook(logMessage, true);
-            if (logMessage.Severity > _severityPrivate) return;
-            WriteMessageToWebhook(logMessage, false);
+            if (_logToDiscord)
+            {
+                if (logMessage.Severity <= _severityPublic && logMessage.Severity != LogMessageSeverity.Debug) WriteMessageToWebhook(logMessage, true);
+                if (logMessage.Severity <= _severityPrivate && logMessage.Severity != LogMessageSeverity.Debug) WriteMessageToWebhook(logMessage, false);    
+            }
+            if (logMessage.Severity > _severityServer) return;
             WriteMessageToLogFile(logMessage);
             WriteMessageToConsole(logMessage);
         }
@@ -216,7 +232,7 @@ namespace FiveSpn.Logger.Server
                     return Task.FromResult("Queued");
                 }
 
-                _hookQuePrivate.Enqueue($"**{logMessage.Source}-{logMessage.Severity}** {DateTime.Now,-19} *{logMessage.Message}*");
+                _hookQuePrivate.Enqueue($"**{logMessage.Source} {logMessage.Severity}** {DateTime.Now,-19} *{logMessage.Message}*");
                 return Task.FromResult("Queued");
             }
         }
