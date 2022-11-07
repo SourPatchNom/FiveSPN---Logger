@@ -1,6 +1,6 @@
 # FiveSPN---Logger
 
-A cross resource logging library that records logs both server-based and client-based and broadcasts logs to a public and/or private Discord channel in your Discord server.
+FiveSPN-Logger is a cross resource FiveM logging service that permits txt file, console, and discord logging of anything you send to it. Events are available for both server and client sources. Discord logs can be sent to a public webhook for things like "server starting" and a private webhook for things like errors or events (IE someone did/spawned/deleted this or this resource had an error etc).
 
 ## Installation
 
