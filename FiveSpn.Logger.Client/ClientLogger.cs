@@ -1,8 +1,7 @@
 ﻿using System;
 using CitizenFX.Core;
-using CitizenFX.Core.Native;
-using FiveSpn.Logger.Client.Classes;
-using FiveSpn.Logger.Client.Enums;
+using FiveSpn.Logger.Library.Classes;
+using FiveSpn.Logger.Library.Enums;
 
 namespace FiveSpn.Logger.Client
 {

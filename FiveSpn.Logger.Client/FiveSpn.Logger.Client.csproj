@@ -49,13 +49,17 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Classes\LogMessage.cs" />
         <Compile Include="ClientLogger.cs" />
-        <Compile Include="Enums\LogMessageSeverity.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\FiveSpn.Logger.Library\FiveSpn.Logger.Library.csproj">
+        <Project>{8575d0d3-5b9e-4154-acdb-486197a019e7}</Project>
+        <Name>FiveSpn.Logger.Library</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
