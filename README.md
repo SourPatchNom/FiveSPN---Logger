@@ -54,7 +54,22 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## Discord
 FiveM development can be even more amazing if we work together to grow the open source community! Lets Collab! Join the project discord at [itsthenom.com!](http://itsthenom.com/)
 
-## Licenses
+## Licensing
+
+    Copyright ©2022 Owen Dolberg (SourPatchNom)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 In the hopes that the greater community may benefit, you may use this code under the [GNU Affero General Public License v3.0](LICENSE).
 
