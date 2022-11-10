@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpn.Logger.Client", "FiveSpn.Logger.Client\FiveSpn.Logger.Client.csproj", "{3DFCEA24-0833-4181-9731-55DA02C65317}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpn.Logger.Client", "src\FiveSpn.Logger.Client\FiveSpn.Logger.Client.csproj", "{3DFCEA24-0833-4181-9731-55DA02C65317}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpn.Logger.Library", "FiveSpn.Logger.Library\FiveSpn.Logger.Library.csproj", "{8575D0D3-5B9E-4154-ACDB-486197A019E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpn.Logger.Library", "src\FiveSpn.Logger.Library\FiveSpn.Logger.Library.csproj", "{8575D0D3-5B9E-4154-ACDB-486197A019E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpn.Logger.Server", "FiveSpn.Logger.Server\FiveSpn.Logger.Server.csproj", "{72D125C8-B78D-4A10-8C05-67EEDDD7EE24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiveSpn.Logger.Server", "src\FiveSpn.Logger.Server\FiveSpn.Logger.Server.csproj", "{72D125C8-B78D-4A10-8C05-67EEDDD7EE24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
